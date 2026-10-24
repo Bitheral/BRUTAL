@@ -1,0 +1,35 @@
+<!--
+  Builds Brutal.Vulkan from this fork for Regolith's mobile game builds (Regolith ADR 0020). Matches the
+  Ahwoo.BRUTAL.Vulkan 2026.10.3 NuGet package (same dependencies) plus the Android and iOS loader patch.
+  Pack: dotnet pack regolith/Brutal.Vulkan.csproj -c Release -o <feed>
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>Brutal.Vulkan</AssemblyName>
+    <RootNamespace>Brutal.VulkanApi</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <LangVersion>preview</LangVersion>
+    <IsAotCompatible>true</IsAotCompatible>
+    <NoWarn>$(NoWarn);CS1591;CS8500</NoWarn>
+    <PackageId>Ahwoo.BRUTAL.Vulkan</PackageId>
+    <Version>2026.10.3.1</Version>
+    <Authors>Ahwoo Limited; Regolith</Authors>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Brutal.Vulkan/**/*.cs" />
+    <None Include="../LICENSE.txt;../NOTICE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ahwoo.BRUTAL.Vulkan.Native" Version="2026.10.3" />
+    <PackageReference Include="Ahwoo.BRUTAL.Core" Version="2026.10.4" />
+    <PackageReference Include="Ahwoo.BRUTAL.Logging" Version="2026.10.3" />
+    <PackageReference Include="Ahwoo.BRUTAL.Memory" Version="2026.10.2" />
+    <PackageReference Include="Ahwoo.BRUTAL.Numerics" Version="2026.10.2" />
+    <PackageReference Include="Ahwoo.BRUTAL.Strings" Version="2026.10.2" />
+  </ItemGroup>
+</Project>

@@ -60,6 +60,14 @@ public partial class Vulkan
         if (OperatingSystem.IsLinux())
             candidates = ["libvulkan.so.1", "vulkan"];
 
+        // Android ships the loader as libvulkan.so in the system image (API 24 and later)
+        if (OperatingSystem.IsAndroid())
+            candidates = ["libvulkan.so"];
+
+        // iOS has no system loader: the app embeds MoltenVK as a dynamic framework
+        if (OperatingSystem.IsIOS())
+            candidates = ["@rpath/MoltenVK.framework/MoltenVK", "libMoltenVK.dylib"];
+
         foreach (var candidate in candidates)
         {
             if (NativeLibrary.TryLoad(candidate, assembly, DllImportSearchPath.LegacyBehavior, out var dll))
